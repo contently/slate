@@ -431,6 +431,17 @@ curl -X GET https://api.contently.com/v1/taxonomy \
         { "id": 2, "name": "Attribute value 2" }
       ]
     }
+  ],
+  "story_types": [
+    "Article",
+    "Case Study",
+    "eBook",
+    "Infographic",
+    "Original research",
+    "Other",
+    "Photo",
+    "Video",
+    "Whitepaper"
   ]
 }
 ```
@@ -465,3 +476,7 @@ Field name | Type | Description
 id | Integer | The unique identifier for the story attribute.
 name | String | The name of the story attribute.
 values | Array | An array of all the possible values that can be assigned to a story for a given story attribute.
+
+### Story types
+
+An array of all the possible story types that can be assigned to a story. This list is *not* customizable and is the same across all publications. Possible values are: Article, Case Study, eBook, Infographic, Original research, Other, Photo, Video and Whitepaper
