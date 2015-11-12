@@ -123,6 +123,7 @@ curl --get https://api.contently.com/v1/stories \
   {
     "id": 1,
     "title": "Example story",
+    "published": true,
     "published_to_url": "http://example.com",
     "publication":{
       "id": 1,
@@ -262,6 +263,7 @@ Returns fields for the specified story.
   "id": 1,
   "story_type": "Article / blog post",
   "title": "Example story",
+  "published": true,
   "published_to_url": "http://example.com",
   "publication":{
     "id": 1,
