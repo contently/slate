@@ -28,8 +28,7 @@ The current API endpoint is:
 
 ```shell
 curl --get https://api.contently.com/v1/stories \
-   -H "Contently-Api-Key: <API_KEY>" \
-   -d status=completed
+   -H "Contently-Api-Key: <API_KEY>"
 ```
 
 > Make sure to replace `<API_KEY>` with your API key.
@@ -65,10 +64,10 @@ When something goes wrong, we will respond with the appropriate HTTP status code
 
 ```shell
 Link:
-<https://api.contently.com/v1/stories?status=completed&page=4&per_page=25>; rel="next",
-<https://api.contently.com/v1/stories?status=completed&page=2&per_page=25>; rel="prev",
-<https://api.contently.com/v1/stories?status=completed&page=1&per_page=25>; rel="first",
-<https://api.contently.com/v1/stories?status=completed&page=10&per_page=25>; rel="last"
+<https://api.contently.com/v1/stories?page=4&per_page=25>; rel="next",
+<https://api.contently.com/v1/stories?page=2&per_page=25>; rel="prev",
+<https://api.contently.com/v1/stories?page=1&per_page=25>; rel="first",
+<https://api.contently.com/v1/stories?page=10&per_page=25>; rel="last"
 ```
 
 > A request for a specific page of stories looks like:
@@ -76,7 +75,6 @@ Link:
 ```shell
 curl --get https://api.contently.com/v1/stories \
        -H "Contently-Api-Key: <API_KEY>" \
-       -d status=completed \
        -d per_page=50 \
        -d page=2
 ```
@@ -115,8 +113,7 @@ offset | 0 | A positive Integer that specifies the number of records after which
 # GET /stories
 
 curl --get https://api.contently.com/v1/stories \
-       -H "Contently-Api-Key: <API_KEY>" \
-       -d status=completed
+       -H "Contently-Api-Key: <API_KEY>"
  ```
 
 > The above command returns JSON structured like this:
@@ -126,6 +123,7 @@ curl --get https://api.contently.com/v1/stories \
   {
     "id": 1,
     "title": "Example story",
+    "published": true,
     "published_to_url": "http://example.com",
     "publication":{
       "id": 1,
@@ -186,22 +184,11 @@ curl --get https://api.contently.com/v1/stories \
 ]
 ```
 
-> You can also specify multiple statuses at once:
-
-```shell
-# GET /stories
-
-curl --get https://api.contently.com/v1/stories \
-       -H "Contently-Api-Key: <API_KEY>" \
-       -d "status[]=completed&status[]=published"
-```
-
 > Specifying a sort:
 
 ```shell
 curl --get https://api.contently.com/v1/stories \
        -H "Contently-Api-Key: <API_KEY>" \
-       -d status=completed \
        -d sort_by=last_modified_at \
        -d sort_direction=asc
 ```
@@ -211,8 +198,9 @@ curl --get https://api.contently.com/v1/stories \
 ```shell
 curl --get https://api.contently.com/v1/stories \
   -H "Contently-Api-Key: <API_KEY>" \
-  -d status=completed \
-  -d 'date_range[start]=1420732536&date_range[end]=1420646154&date_range[type]=completed_at'
+  -d 'date_range[start]=1420732536' \
+  -d 'date_range[end]=1420646154' \
+  -d 'date_range[type]=completed_at'
 ```
 
 There is a single endpoint available for querying stories.
@@ -223,12 +211,10 @@ This endpoint returns an array of objects representing stories (details to the s
 
 Parameter | Required | Default | Description | Valid values
 ---- | ---- | ---- | -------- | ---------
-status | Yes |  | A String that specifies status of the stories you want. | completed, published
+published | No |  | A boolean value specifying a filter for published (true) or unpublished (false), respectively | true, false
 sort_by | No | created_at | A String specifying the attribute of a story that you want to sort by. | See valid date fields below
 sort_direction | No | desc | A String specifying whether you want the sorted stories to be returned in ascending or descending order. | asc, desc
 date_range | No | | A JSON object representing the date range | See 'Specifying a date range below'
-
-<aside class="warning">Remember: 'status' is a *required* parameter - failing to provide it will result in a 400 error</aside>
 
 ### Specifying a date range
 
@@ -268,7 +254,7 @@ curl --get https://api.contently.com/v1/stories/:id \
 
 Returns fields for the specified story.
 
-<aside class="notice">Note that the story must be either 'completed' or 'published', otherwise a 404 will be returned.</aside>
+<aside class="notice">Note that the story must be completed, otherwise a 404 will be returned.</aside>
 
 ### Story JSON
 
@@ -277,6 +263,7 @@ Returns fields for the specified story.
   "id": 1,
   "story_type": "Article / blog post",
   "title": "Example story",
+  "published": true,
   "published_to_url": "http://example.com",
   "publication":{
     "id": 1,
@@ -344,6 +331,7 @@ story_type | String | The type of story, such as Article or Infographic.
 title | String | The story title.
 content | String (HTML) | The raw HTML of the story.
 url | String | A link to the story on the Contently platform.
+published | Boolean | Whether or not the story is flagged as published.
 published_to_url | String | The URL where the story is published.
 due_at | Unix datetime | The date the first version of the story was due.
 publish_at | Unix datetime | The date the story is planned to be published.
@@ -374,13 +362,13 @@ curl -X PUT https://api.contently.com/v1/stories/:id/mark_published \
 
 **If you are integrating the Contently API with your CMS, it is vital that you notify the Contently platform that a story has been published. This allows us to display the published_to_url on the platform and provide analytics data for the story.**
 
-This endpoint updates the specified story, changing its status to 'published' and adding an item to the story's audit log (visible on the Contently platform) documenting the change. It enables analytics tracking and makes sure that published data on the platform is always up to date. It returns the story object if the update succeeded or an error message otherwise.
+This endpoint updates the specified story, flagging it as published and adding an item to the story's audit log (visible on the Contently platform) documenting the change. It enables analytics tracking and makes sure that published data on the platform is always up to date. It returns the story object if the update succeeded or an error message otherwise.
 
-If a story is already 'published', you must include the **published_at** date in the request if you wish to override the existing date.
+If a story is already published, you must include the **published_at** date in the request if you wish to override the existing date.
 
 The **publish_at** date is the planned publish date that is specified in the Contently platform, this value is useful for automating publishing.
 
-<aside class="notice">Note that attemping to mark published a story that is not currently 'completed' or 'published' will result in a 403 error.</aside>
+<aside class="notice">Note that attemping to mark published a story that is not currently completed will result in a 403 error.</aside>
 
 Parameter | Required | Default | Description | Valid values
 ---- | ---- | ---- | -------- | ---------
@@ -400,7 +388,7 @@ Speak with your account manager to configure the webhook for your publication.
 ```shell
 # GET /taxonomy
 
-curl -X GET https://api.contently.com/v1/taxonomy \
+curl -G https://api.contently.com/v1/taxonomy \
        -H "Contently-Api-Key: <API_KEY>" \
 ```
 
