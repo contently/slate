@@ -479,4 +479,4 @@ values | Array | An array of all the possible values that can be assigned to a s
 
 ### Story types
 
-An array of all the possible story types that can be assigned to a story. This list is *not* customizable and is the same across all publications. Possible values are: Article / blog post, Case Study, eBook, Infographic, Original research, Other, Photo, Video and Whitepaper
+An array of all the possible story types that can be assigned to a story. This list is *not* customizable and is the same across all publications. Possible values are: Article / blog post, Case Study, eBook, Email, Infographic, Original research, Other, Photo, Video and Whitepaper
