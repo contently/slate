@@ -375,13 +375,41 @@ Parameter | Required | Default | Description | Valid values
 published_to_url | No | | A String indicating the URL where the story was published | A valid URL beginning with 'http://' or 'https://'
 published_at | No | The time the request is made (if the story has not already been published) | Unix timestamp indicating the time the story was pubilshed | Any valid date
 
-## Webhook
+# Webhook
+
+```shell
+# PUT /set_webhook
+
+curl -X PUT https://api.contently.com/v1/set_webhook \
+       -H "Contently-Api-Key: <API_KEY>" \
+       -d webhook_url=http://example.com
+
+```
+
+> The response JSON is structured like this:
+
+```json
+{
+  "webhook_url" : "http://example.com",
+  "name" : "Publication name",
+  "updated_at" : 1421771582
+}
+```
+
+There is a single endpoint available for updating the webhook url for a publication.
+
+`https://api.contently.com/v1/set_webhook`
+
+
+The set webhook endpoint provides you with access to set a publication's webhook url.
 
 To make publishing stories easier, we provide a webhook that will push stories to you as they are completed. Our webhook will submit a POST request to the URL you specifiy so that you don't have to poll for newly completed stories. The body of the request will contain the JSON data for the story in the [format specified above](#story-details).
 
 If security is a concern and you want to verify that Contently sent the webhook, you can simply use the story ID sent over (ignoring the rest of the request) to [request the story directly](#story-details) from our API. This will return the same information that we push to you via the webhook, but you will have initiated the request and specified the story based on the story ID initially pushed to you.
 
-Speak with your account manager to configure the webhook for your publication.
+Parameter | Required | Default | Description | Valid values
+---- | ---- | ---- | -------- | ---------
+webhook_url | Yes | | A String indicating the URL where the stories will pushed once completed | A valid URL beginning with 'http://' or 'https://'
 
 # Taxonomy
 
