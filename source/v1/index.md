@@ -15,11 +15,11 @@ search: true
 
 Welcome to the Contently API. You can use our API to access your publication's taxonomy, stories, and to mark stories as published.
 
-The current version of the API is v1. When backwards-incompatible changes are made to the API, we will bump the version number in the request path.
+v1 of the Contently API is deprecated, please update your integration to use: `https://api.contently.com/v2/`
 
 The current API endpoint is:
 
-`https://api.contently.com/v1/`
+`https://api.contently.com/v2/`
 
 
 # Authentication
