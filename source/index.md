@@ -143,13 +143,13 @@ curl --get https://api.contently.com/v1/stories \
       "email": "rando@example.com"
     }
     ],
-    "story_fields": [
+    "custom_fields": [
       {
         "id": 1,
         "name": "Twitter",
         "content": "<p>HTML content</p>",
         "asset_url": "https://s3.amazonaws.com/path_to_file",
-        "publication_story_field_id": 2
+        "publication_custom_field_id": 2
       }
     ],
     "due_at": 1421771582,
@@ -161,9 +161,9 @@ curl --get https://api.contently.com/v1/stories \
     "content": "<p>HTML body of story</p>",
     "status": "completed",
     "url": "https://contently.com/stories/1",
-    "story_attributes": [
+    "tags": [
       {
-        "publication_story_attribute_id": 1,
+        "publication_tag_group_id": 1,
         "name": "Attribute name",
         "values": [
           { "id": 1, "name": "Attribute value 1" },
@@ -283,13 +283,13 @@ Returns fields for the specified story.
     "email": "rando@example.com"
   }
   ],
-  "story_fields": [
+  "custom_fields": [
     {
       "id": 1,
       "name": "Twitter",
       "content": "<p>HTML content</p>",
       "asset_url": "https://s3.amazonaws.com/path_to_file",
-      "publication_story_field_id": 2
+      "publication_custom_field_id": 2
     }
   ],
   "due_at": 1421771582,
@@ -301,9 +301,9 @@ Returns fields for the specified story.
   "content": "<p>HTML body of story</p>",
   "status": "completed",
   "url": "https://contently.com/stories/1",
-  "story_attributes": [
+  "tags": [
     {
-      "publication_story_attribute_id": 1,
+      "publication_tag_group_id": 1,
       "name": "Attribute name",
       "values": [
         { "id": 1, "name": "Attribute value 1" },
@@ -343,8 +343,10 @@ contributors | Array of Objs. | An array of the Contently users who worked on th
 creator | Obj. | The user who created the story.
 publication | Obj. | The publication includes the ID and name of the story's associated publication.
 assets | Array of Objs. | An array of images embedded in the story content.
-story_fields | Array of Objs. | An array of the story's associated story fields and their content (These are freeform and extensions of stories, things like excerpts, tweets, and header images). The publication_story_field_id is an Integer that references the associated publication_story_field configured at the publication level and available via the taxonomy endpoint.
-story_attributes | Array of Objs. | Each story attribute has a publication_story_attribute_id (Integer, the unique ID of the attribute from the publication taxonomy), a name (String, also defined at the publication level), and an array of values. These are configured at a publication level and assigned to stories by users to categorize and describe them.
+custom_fields | Array of Objs. | An array of the story's associated custom fields and their content (These are freeform and extensions of stories, things like excerpts, tweets, and header images). The publication_custom_field_id is an Integer that references the associated publication_custom_field configured at the publication level and available via the taxonomy endpoint.
+story_fields | Array of Objs. | Deprecated, alias for custom_fields.
+tags | Array of Objs. | Each tag group has a publication_tag_group_id (Integer, the unique ID of the tag group from the publication taxonomy), a name (String, also defined at the publication level), and an array of values. These are configured at a publication level and assigned to stories by users to categorize and describe them.
+story_attributes | Array of Objs. | Deprecated, alias for tags.
 
 ## Marking stories published
 
@@ -432,13 +434,13 @@ curl -G https://api.contently.com/v1/taxonomy \
       "email": "rando@example.com"
     }
   ],
-  "publication_story_fields": [
+  "publication_custom_fields": [
     {
       "id": 1,
       "name": "Twitter"
     }
   ],
-  "publication_story_attributes": [
+  "publication_tags": [
     {
       "id": 1,
       "name": "Attribute name",
@@ -478,20 +480,28 @@ first_name | String | The user's first name.
 last_name | String | The user's last name.
 email | String | The user's unique email address.
 
-### Publication story fields
+### Publication custom fields
 
 Field name | Type | Description
 ---- | ---- | ----
-id | Integer | The unique identifier for the story field.
-name | String | The name of the story field.
+id | Integer | The unique identifier for the custom field.
+name | String | The name of the custom field.
+
+### Publication story fields
+
+Deprecated, aliased to Publication custom fields
+
+### Publication tags
+
+Field name | Type | Description
+---- | ---- | ----
+id | Integer | The unique identifier for the tag
+name | String | The name of the story attribute.
+values | Array | An array of all the possible values that can be assigned to a story for a given story attribute.
 
 ### Publication story attributes
 
-Field name | Type | Description
----- | ---- | ----
-id | Integer | The unique identifier for the story attribute.
-name | String | The name of the story attribute.
-values | Array | An array of all the possible values that can be assigned to a story for a given story attribute.
+Deprecated, aliased to Publication tags
 
 ### Story types
 
