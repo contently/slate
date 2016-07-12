@@ -261,7 +261,7 @@ Returns fields for the specified story.
 ```json
 {
   "id": 1,
-  "story_type": "Article / blog post",
+  "story_format": "Article / blog post",
   "title": "Example story",
   "published": true,
   "published_to_url": "http://example.com",
@@ -327,7 +327,7 @@ Field name | Type | Description
 ---- | ---- | ----
 id | Integer | The unique identifier for the story.
 status | String | The current status of the story.
-story_type | String | The type of story, such as Article or Infographic.
+story_format | String | The format of story, such as Article or Infographic.
 title | String | The story title.
 content | String (HTML) | The raw HTML of the story.
 url | String | A link to the story on the Contently platform.
@@ -347,6 +347,7 @@ custom_fields | Array of Objs. | An array of the story's associated custom field
 story_fields | Array of Objs. | Deprecated, alias for custom_fields.
 tags | Array of Objs. | Each tag group has a publication_tag_group_id (Integer, the unique ID of the tag group from the publication taxonomy), a name (String, also defined at the publication level), and an array of values. These are configured at a publication level and assigned to stories by users to categorize and describe them.
 story_attributes | Array of Objs. | Deprecated, alias for tags.
+story_type | String | Deprecated, alias for story_format.
 
 ## Marking stories published
 
@@ -450,7 +451,7 @@ curl -G https://api.contently.com/v1/taxonomy \
       ]
     }
   ],
-  "story_types": [
+  "story_formats": [
     "Article / blog post",
     "Case Study",
     "eBook",
@@ -503,6 +504,10 @@ values | Array | An array of all the possible values that can be assigned to a s
 
 Deprecated, aliased to Publication tags
 
+### Story formats
+
+An array of all the possible story formats that can be assigned to a story. This list is *not* customizable and is the same across all publications. Possible values are: Article / blog post, Case study, eBook, Email, Facebook post, Infographic, LinkedIn post, Original research, Photo, Presentation / brochure, Tweet, Video, Whitepaper and Other.
+
 ### Story types
 
-An array of all the possible story types that can be assigned to a story. This list is *not* customizable and is the same across all publications. Possible values are: Article / blog post, Case Study, eBook, Email, Infographic, Original research, Other, Photo, Video and Whitepaper
+Deprecated, aliased to Story formats
