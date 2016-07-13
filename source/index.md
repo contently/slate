@@ -405,7 +405,7 @@ There is a single endpoint available for updating the webhook url for a publicat
 
 The set webhook endpoint provides you with access to set a publication's webhook url.
 
-To make publishing stories easier, we provide a webhook that will push stories to you as they are completed. Our webhook will submit a POST request to the URL you specifiy so that you don't have to poll for newly completed stories. The body of the request will contain the JSON data for the story in the [format specified above](#story-details).
+To make publishing stories easier, we provide a webhook that allows you to push stories to your CMS after they are completed. When a user triggers the webhook on the Contently platform, it will submit a POST request to the URL you specify containing the JSON data for the story in the [format specified above](#story-details).
 
 If security is a concern and you want to verify that Contently sent the webhook, you can simply use the story ID sent over (ignoring the rest of the request) to [request the story directly](#story-details) from our API. This will return the same information that we push to you via the webhook, but you will have initiated the request and specified the story based on the story ID initially pushed to you.
 
