@@ -171,6 +171,7 @@ curl --get https://api.contently.com/v1/stories \
         ]
       }
     ],
+    "seo_keywords": ["content marketing", "telling stories"],
     "assets": [
       {
         "id": 1,
@@ -311,6 +312,7 @@ Returns fields for the specified story.
       ]
     }
   ],
+  "seo_keywords": ["content marketing", "telling stories"],
   "assets": [
     {
       "id": 1,
@@ -346,6 +348,7 @@ assets | Array of Objs. | An array of images embedded in the story content.
 custom_fields | Array of Objs. | An array of the story's associated custom fields and their content (These are freeform and extensions of stories, things like excerpts, tweets, and header images). The publication_custom_field_id is an Integer that references the associated publication_custom_field configured at the publication level and available via the taxonomy endpoint.
 story_fields | Array of Objs. | Deprecated, alias for custom_fields.
 tags | Array of Objs. | Each tag group has a publication_tag_group_id (Integer, the unique ID of the tag group from the publication taxonomy), a name (String, also defined at the publication level), and an array of values. These are configured at a publication level and assigned to stories by users to categorize and describe them.
+seo_keywords | Array of strings | An array of the story's SEO keywords.
 story_attributes | Array of Objs. | Deprecated, alias for tags.
 story_type | String | Deprecated, alias for story_format.
 
