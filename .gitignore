@@ -21,3 +21,4 @@ _yardoc
 doc/
 .idea/
 .s3_sync
+/vendor/**/*
