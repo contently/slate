@@ -464,6 +464,25 @@ curl -G https://api.contently.com/v1/taxonomy \
     "Photo",
     "Video",
     "Whitepaper"
+  ],
+  "story_attributes": [
+    { "name": "id" },
+    { "name": "title" },
+    { "name": "published" },
+    { "name": "published_to_url" },
+    { "name": "publication" },
+    { "name": "creator" },
+    { "name": "due_at" },
+    { "name": "publish_at" },
+    { "name": "created_at" },
+    { "name": "published_at" },
+    { "name": "last_modified_at" },
+    { "name": "completed_at" },
+    { "name": "content" },
+    { "name": "status" },
+    { "name": "url" },
+    { "name": "seo_keywords" },
+    { "name": "assets" }
   ]
 }
 ```
@@ -514,3 +533,7 @@ An array of all the possible story formats that can be assigned to a story. This
 ### Story types
 
 Deprecated, aliased to Story formats
+
+### Story attributes
+
+An array of story attribute key value pairs. Each entry contains a 'name' key, the value of which is the attribute name. which are available on stories received via the stories end-point. This array is *not* customizable and is the same across all publications.
