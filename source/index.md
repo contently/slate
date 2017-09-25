@@ -148,7 +148,10 @@ curl --get https://api.contently.com/v1/stories \
         "id": 1,
         "name": "Twitter",
         "content": "<p>HTML content</p>",
-        "asset_url": "https://s3.amazonaws.com/path_to_file",
+        "file_name": "a_great_asset.png",
+        "file_size_bytes": "67481",
+        "mime_type": "image/png",
+        "asset_url": "https://s3.amazonaws.com/a_great_asset.png",
         "publication_custom_field_id": 2
       }
     ],
@@ -175,8 +178,11 @@ curl --get https://api.contently.com/v1/stories \
     "assets": [
       {
         "id": 1,
-        "url": "https://s3.amazonaws.com/path_to_file",
-        "name": "filename.png",
+        "url": "https://s3.amazonaws.com/another_great_asset.png",
+        "name": "another_great_asset.png",
+        "file_name": "another_great_asset.png",
+        "file_size_bytes": "38182",
+        "mime_type": "image/png",
         "created_at": 1421771582,
         "updated_at": 1421771582
       }
@@ -289,7 +295,10 @@ Returns fields for the specified story.
       "id": 1,
       "name": "Twitter",
       "content": "<p>HTML content</p>",
-      "asset_url": "https://s3.amazonaws.com/path_to_file",
+      "file_name": "a_great_asset.png",
+      "file_size_bytes": "67481",
+      "mime_type": "image/png",
+      "asset_url": "https://s3.amazonaws.com/a_great_asset.png",
       "publication_custom_field_id": 2
     }
   ],
@@ -316,8 +325,11 @@ Returns fields for the specified story.
   "assets": [
     {
       "id": 1,
-      "url": "https://s3.amazonaws.com/path_to_file",
-      "name": "filename.png",
+      "url": "https://s3.amazonaws.com/another_great_asset.png",
+      "name": "another_great_asset.png",
+      "file_name": "another_great_asset.png",
+      "file_size_bytes": "38182",
+      "mime_type": "image/png",
       "created_at": 1421771582,
       "updated_at": 1421771582
     }
