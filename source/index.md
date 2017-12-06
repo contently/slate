@@ -453,7 +453,8 @@ curl -G https://api.contently.com/v1/taxonomy \
   "publication_custom_fields": [
     {
       "id": 1,
-      "name": "Twitter"
+      "name": "Twitter",
+      "content_type": "standard"
     }
   ],
   "publication_tags": [
@@ -521,6 +522,7 @@ Field name | Type | Description
 ---- | ---- | ----
 id | Integer | The unique identifier for the custom field.
 name | String | The name of the custom field.
+content_type | String | The content type of the custom field, such as video.
 
 ### Publication story fields
 
