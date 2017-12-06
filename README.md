@@ -1,3 +1,13 @@
+### Setup
+
+```
+rbenv install 2.1.5
+gem install bundle
+gem install libv8 -v '3.16.14.7' -- --with-system-v8
+gem install therubyracer -v '0.12.1' -- --with-system-v8
+bundle install
+```
+
 ### Deploying documentation changes
 
 We use s3 to host the static documentation pages. Once you've made changes to the ```source/index.md``` file, take the following steps to deploy them:
