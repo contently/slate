@@ -122,6 +122,7 @@ curl --get https://api.contently.com/v1/stories \
 [
   {
     "id": 1,
+    "story_format": "Article / blog post",
     "title": "Example story",
     "published": true,
     "published_to_url": "http://example.com",
@@ -147,6 +148,7 @@ curl --get https://api.contently.com/v1/stories \
       {
         "id": 1,
         "name": "Twitter",
+        "content_type": "standard",
         "content": "<p>HTML content</p>",
         "file_name": "a_great_asset.png",
         "file_size_bytes": "67481",
@@ -294,6 +296,7 @@ Returns fields for the specified story.
     {
       "id": 1,
       "name": "Twitter",
+      "content_type": "standard",
       "content": "<p>HTML content</p>",
       "file_name": "a_great_asset.png",
       "file_size_bytes": "67481",
@@ -453,7 +456,8 @@ curl -G https://api.contently.com/v1/taxonomy \
   "publication_custom_fields": [
     {
       "id": 1,
-      "name": "Twitter"
+      "name": "Twitter",
+      "content_type": "standard"
     }
   ],
   "publication_tags": [
@@ -521,6 +525,7 @@ Field name | Type | Description
 ---- | ---- | ----
 id | Integer | The unique identifier for the custom field.
 name | String | The name of the custom field.
+content_type | String | The content type of the custom field, such as video.
 
 ### Publication story fields
 
