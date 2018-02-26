@@ -554,3 +554,109 @@ Deprecated, aliased to Story formats
 ### Story attributes
 
 An array of story attribute key value pairs. Each entry contains a 'name' key, the value of which is the attribute name. which are available on stories received via the stories end-point. This array is *not* customizable and is the same across all publications.
+
+# Collections
+
+```shell
+# GET /taxonomy
+
+curl -G https://api.contently.com/v1/collections/:id \
+       -H "Contently-Api-Key: <API_KEY>" \
+```
+
+### Collections JSON
+
+```json
+{
+	"total_pages": 10,
+	"page": 1,
+	"per_page": 20,
+	"total_results": 200,
+	"results_count": 20,
+	"results": [
+		{
+			"id": 123,
+			"title": "Story Title About Cats",
+			"s_id": "abc123",
+			"source": "source",
+			"url": "http://contently.com/story-title-about-cats",
+			"created_at": "2018-01-01T12:31:58-04:00",
+			"platform_brand_profile_id": 123,
+			"platform_story_attributes": [
+                {
+                    "name": "Types of Cats",
+                    "count": 23,
+                    "tags": [
+                        {
+                            "name": "Siamese",
+                            "count": 21
+                        },
+                        {
+                            "name": "Persian",
+                            "count": 2
+                        }
+                    ]
+                }
+			],
+			"platform_story_id": 321,
+			"text": "Cats are great! Unless you're allergic."
+		}
+	],
+	"tag_groups": [
+		{
+			"name": "Types of Cats",
+			"count": 23,
+			"tags": [
+				{
+					"name": "Siamese",
+					"count": 21
+				},
+				{
+					"name": "Persian",
+					"count": 2
+				}
+			]
+		}
+	]
+}
+```
+
+The *collections* endpoint provides you access to page details for an organization linked to the supplied API key.
+
+Parameter | Default | Description
+--------- | ------- | -----------
+per_page | 20 | A positive Integer that specifies the number of records per page, max is 100.
+page | 1 | A positive Integer that specifies the page you want.
+tags | N/A | A list of tag groups and tags to filter results by. ex: `tags[]=types-of-cats=persian`
+q | N/A | Search param to filter results by. Matches on title and text.
+
+Field name | Type | Description
+---- | ---- | ----
+total_pages | Integer | Total number of pages of results
+page | Integer | The current page of results
+per_page | Integer | Number of results per page
+total_results | Integer | Total results for all pages
+results_count | Integer | number of results returned for the given page
+
+### Results JSON
+
+Field name | Type | Description
+---- | ---- | ----
+id | Integer | ID of the returned page detail
+title | String | Title of the page detail
+s_id | Integer | Site ID of the page detail
+Source | String | Source of the page detail
+url | String | URL of the page detail
+created_at | String | Date of creation for the page detail
+platform_brand_profile_id | Integer | Brand Profile for the page detail
+platform_story_attributes | Array of Objs. | Associated tags with the page detail's related story
+platform_story_id | Integer | ID for the page detail's associated story
+text | String | Page detail's story text content
+
+### Tag Groups JSON
+
+Field name | Type | Description
+---- | ---- | ----
+name | String | Name of the tag group
+count | Integer | Number of times all tags in tag group are used in results
+tags | Array of Objs. | Individual tags that exist inside the tag group. Each tag includes a name and how many times there are referenced by the results
