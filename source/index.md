@@ -417,12 +417,12 @@ curl -X PUT https://api.contently.com/v1/set_webhook \
 }
 ```
 
-There is a single endpoint available for updating the webhook url for a publication.
+There is a single endpoint available for updating the webhook url for an integration.
 
 `https://api.contently.com/v1/set_webhook`
 
 
-The set webhook endpoint provides you with access to set a publication's webhook url.
+The set webhook endpoint provides you with access to set an integration's webhook url.
 
 To make publishing stories easier, we provide a webhook that allows you to push stories to your CMS after they are completed. When a user triggers the webhook on the Contently platform, it will submit a POST request to the URL you specify containing the JSON data for the story in the [format specified above](#story-details).
 
@@ -445,79 +445,136 @@ curl -G https://api.contently.com/v1/taxonomy \
 
 ```json
 {
-  "contributors":[
-    {
-      "id": 1,
-      "first_name": "Rando",
-      "last_name": "Calrissian",
-      "email": "rando@example.com"
-    }
-  ],
-  "publication_custom_fields": [
-    {
-      "id": 1,
-      "name": "Twitter",
-      "content_type": "standard"
-    }
-  ],
-  "publication_tags": [
-    {
-      "id": 1,
-      "name": "Attribute name",
-      "values": [
-        { "id": 1, "name": "Attribute value 1" },
-        { "id": 2, "name": "Attribute value 2" }
-      ]
-    }
-  ],
-  "story_formats": [
-    "Article / blog post",
-    "Case Study",
-    "eBook",
-    "Infographic",
-    "Original research",
-    "Other",
-    "Photo",
-    "Video",
-    "Whitepaper"
-  ],
-  "story_attributes": [
-    { "name": "id" },
-    { "name": "title" },
-    { "name": "published" },
-    { "name": "published_to_url" },
-    { "name": "publication" },
-    { "name": "creator" },
-    { "name": "due_at" },
-    { "name": "publish_at" },
-    { "name": "created_at" },
-    { "name": "published_at" },
-    { "name": "last_modified_at" },
-    { "name": "completed_at" },
-    { "name": "content" },
-    { "name": "status" },
-    { "name": "url" },
-    { "name": "seo_keywords" },
-    { "name": "assets" }
-  ]
+    "integration": {
+        "name": "Multi-Pub CMS Integration"
+    },
+    "publication_custom_fields": [
+        {
+            "id": 1,
+            "name": "Twitter",
+            "content_type": "standard"
+        }
+    ],
+    "publication_tags": [
+        {
+            "id": 1,
+            "name": "Attribute name",
+            "values": [
+                { "id": 1, "name": "Attribute value 1" },
+                { "id": 2, "name": "Attribute value 2" }
+            ]
+        }
+    ],
+    "contributors":[
+        {
+            "id": 1,
+            "first_name": "Rando",
+            "last_name": "Calrissian",
+            "email": "rando@example.com"
+        }
+    ],
+    "story_formats": [
+        "Article / blog post",
+        "Case study",
+        "eBook",
+        "Email",
+        "Facebook post",
+        "Infographic",
+        "LinkedIn post",
+        "Original research",
+        "Photo",
+        "Podcast",
+        "Presentation / brochure",
+        "Tweet",
+        "Video",
+        "Whitepaper",
+        "Other"
+    ],
+    "story_attributes": [
+        {
+            "name": "id",
+            "type": "integer"
+        },
+        {
+            "name": "title",
+            "type": "string"
+        },
+        {
+            "name": "published",
+            "type": "boolean"
+        },
+        {
+            "name": "published_to_url",
+            "type": "string"
+        },
+        {
+            "name": "publication",
+            "type": "object"
+        },
+        {
+            "name": "creator",
+            "type": "object"
+        },
+        {
+            "name": "due_at",
+            "type": "datetime"
+        },
+        {
+            "name": "publish_at",
+            "type": "datetime"
+        },
+        {
+            "name": "created_at",
+            "type": "datetime"
+        },
+        {
+            "name": "published_at",
+            "type": "datetime"
+        },
+        {
+            "name": "last_modified_at",
+            "type": "datetime"
+        },
+        {
+            "name": "completed_at",
+            "type": "datetime"
+        },
+        {
+            "name": "content",
+            "type": "html"
+        },
+        {
+            "name": "status",
+            "type": "string"
+        },
+        {
+            "name": "url",
+            "type": "string"
+        },
+        {
+            "name": "seo_keywords",
+            "type": "array_of_strings"
+        },
+        {
+            "name": "assets",
+            "type": "array_of_objects"
+        }
+    ]
 }
 ```
 
-There is a single endpoint available for querying the taxonomy of your publication.
+There is a single endpoint available for querying the combined taxonomy of all publications tied
+to an integration.
 
 `https://api.contently.com/v1/taxonomy`
 
 
-The *taxonomy* endpoint provides you with access to publication level data that helps you understand your stories in a broader context. It returns story attributes, publication story fields, and user data to enable mappings between data on the Contently platform and the respective fields on your side.
+The *taxonomy* endpoint provides you with access to publication level data that helps you understand your stories in a broader context. It returns integration, custom field, tag, contributor, story format, and story attribute data to enable mappings between data on the Contently platform and the respective fields on your side.
 
-### Users
-
+### Integration
 Field name | Type | Description
 ---- | ---- | ----
-id | Integer | The unique identifier for the user.
-first_name | String | The user's first name.
-last_name | String | The user's last name.
-email | String | The user's unique email address.
+name | String | Unique name of integration associated with given API key.
 
 ### Publication custom fields
 
@@ -527,10 +584,6 @@ id | Integer | The unique identifier for the custom field.
 name | String | The name of the custom field.
 content_type | String | The content type of the custom field. Possible values include: video, image, formatted_text, and standard. Video and image custom fields only accept a file upload. Standard custom fields are a legacy type and can include both text input and file uploads in a single custom field.
 
-### Publication story fields
-
-Deprecated, aliased to Publication custom fields
-
 ### Publication tags
 
 Field name | Type | Description
@@ -539,18 +592,34 @@ id | Integer | The unique identifier for the tag
 name | String | The name of the story attribute.
 values | Array | An array of all the possible values that can be assigned to a story for a given story attribute.
 
-### Publication story attributes
+### Contributors
 
-Deprecated, aliased to Publication tags
+Field name | Type | Description
+---- | ---- | ----
+id | Integer | The unique identifier for the user.
+first_name | String | The user's first name.
+last_name | String | The user's last name.
+email | String | The user's unique email address.
 
 ### Story formats
 
-An array of all the possible story formats that can be assigned to a story. This list is *not* customizable and is the same across all publications. Possible values are: Article / blog post, Case study, eBook, Email, Facebook post, Infographic, LinkedIn post, Original research, Photo, Presentation / brochure, Tweet, Video, Whitepaper and Other.
+An array of all the possible story formats that can be assigned to a story. This list is *not* customizable and is the same across all publications. Possible values are shown in the example response to the right.
+
+### Story attributes
+
+An array of story attribute key value pairs. Each entry contains a 'name' key, the value of which is the attribute name. These are the attributes available on the stories from the `/stories` endpoints. This array is *not* customizable and is the same across all publications. Possible values are shown in the example response to the right.
+
+### Publication story fields
+
+Deprecated, aliased to Publication custom fields
 
 ### Story types
 
 Deprecated, aliased to Story formats
 
-### Story attributes
+### Publication story attributes
 
-An array of story attribute key value pairs. Each entry contains a 'name' key, the value of which is the attribute name. which are available on stories received via the stories end-point. This array is *not* customizable and is the same across all publications.
+Deprecated, aliased to Publication tags
+
+
+
