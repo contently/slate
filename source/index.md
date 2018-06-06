@@ -445,7 +445,10 @@ curl -G https://api.contently.com/v1/taxonomy \
 
 ```json
 {
-  "contributors":[
+  "integration": {
+    "name": "CMS Integration:"
+  },
+  "contributors": [
     {
       "id": 1,
       "first_name": "Rando",
@@ -509,6 +512,11 @@ There is a single endpoint available for querying the taxonomy of your publicati
 
 
 The *taxonomy* endpoint provides you with access to publication level data that helps you understand your stories in a broader context. It returns story attributes, publication story fields, and user data to enable mappings between data on the Contently platform and the respective fields on your side.
+
+### Integration
+Field name | Type | Description
+---- | ---- | ----
+name | String | The name of the integration.
 
 ### Users
 
