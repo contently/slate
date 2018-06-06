@@ -1,12 +1,10 @@
 ---
 title: Stories API Reference
 
-language_tabs:
+language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  #- <a href='#'>Sign Up for a Developer Key</a>
-  #- <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 search: true
 ---
@@ -20,7 +18,6 @@ The current version of the API is v1. When backwards-incompatible changes are ma
 The current API endpoint is:
 
 `https://api.contently.com/v1/`
-
 
 # Authentication
 
@@ -107,7 +104,17 @@ offset | 0 | A positive Integer that specifies the number of records after which
 
 # Stories
 
+<<<<<<< HEAD:source/index.md
 ## Querying stories
+||||||| merged common ancestors
+<aside class="notice">
+You must replace `meowmeowmeow` with your personal API key.
+</aside>
+=======
+<aside class="notice">
+You must replace <code>meowmeowmeow</code> with your personal API key.
+</aside>
+>>>>>>> upstream/master:source/index.html.md
 
 ```shell
 # GET /stories
@@ -435,13 +442,21 @@ webhook_url | Yes | | A String indicating the URL where the stories will pushed 
 # Taxonomy
 
 ```shell
+<<<<<<< HEAD:source/index.md
 # GET /taxonomy
 
 curl -G https://api.contently.com/v1/taxonomy \
        -H "Contently-Api-Key: <API_KEY>" \
+||||||| merged common ancestors
+curl "http://example.com/api/kittens/3"
+  -H "Authorization: meowmeowmeow"
+=======
+curl "http://example.com/api/kittens/2"
+  -H "Authorization: meowmeowmeow"
+>>>>>>> upstream/master:source/index.html.md
 ```
 
-> The response JSON is structured like this:
+> The above command returns JSON structured like this:
 
 ```json
 {
@@ -550,7 +565,5 @@ An array of all the possible story formats that can be assigned to a story. This
 ### Story types
 
 Deprecated, aliased to Story formats
-
-### Story attributes
 
 An array of story attribute key value pairs. Each entry contains a 'name' key, the value of which is the attribute name. which are available on stories received via the stories end-point. This array is *not* customizable and is the same across all publications.

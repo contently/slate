@@ -14,6 +14,8 @@ tmp
 *.DS_STORE
 build/
 .cache
+.vagrant
+.sass-cache
 
 # YARD artifacts
 .yardoc
@@ -22,3 +24,4 @@ doc/
 .idea/
 .s3_sync
 /vendor/**/*
+.idea/
