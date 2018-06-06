@@ -1,12 +1,10 @@
 ---
 title: Stories API Reference
 
-language_tabs:
+language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  #- <a href='#'>Sign Up for a Developer Key</a>
-  #- <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 search: true
 ---
@@ -20,7 +18,6 @@ The current version of the API is v1. When backwards-incompatible changes are ma
 The current API endpoint is:
 
 `https://api.contently.com/v1/`
-
 
 # Authentication
 
@@ -41,7 +38,7 @@ To change or reset your API key reach out to your account manager.
 
 > The body of the JSON response will contain an error message:
 
-```shell
+```json
 {
     "error": "Helpful error message"
 }
@@ -441,7 +438,7 @@ curl -G https://api.contently.com/v1/taxonomy \
        -H "Contently-Api-Key: <API_KEY>" \
 ```
 
-> The response JSON is structured like this:
+> The above command returns JSON structured like this:
 
 ```json
 {
