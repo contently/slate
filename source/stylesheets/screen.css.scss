@@ -74,8 +74,9 @@ html, body {
   // This is the logo at the top of the ToC
   .logo {
     display: block;
-    margin: $logo-margin;
-    width: 100%;
+    width: 75%; // keep this Contently specific value
+    margin: 20px; // keep this Contently specific value
+    margin-bottom: $logo-margin;
   }
 
   &>.search {
@@ -103,9 +104,9 @@ html, body {
     }
   }
 
-   img+.tocify {
-     margin-top: $logo-margin;
-   }
+   //img+.tocify {
+   //  margin-top: $logo-margin;
+   //}
 
   .search-results {
     margin-top: 0;
