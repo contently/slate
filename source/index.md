@@ -188,6 +188,18 @@ curl --get https://api.contently.com/v1/stories \
         "created_at": 1421771582,
         "updated_at": 1421771582
       }
+    ],
+    "attached_assets": [
+      {
+        "id": 2,
+        "url": "https://s3.amazonaws.com/an_attached_asset.png",
+        "name": "an_attached_asset.png",
+        "file_name": "an_attached_asset.png",
+        "file_size_bytes": "38182",
+        "mime_type": "image/png",
+        "created_at": 1421771582,
+        "updated_at": 1421771582
+      }
     ]
   }
 ]
@@ -331,6 +343,18 @@ Returns fields for the specified story.
       "url": "https://s3.amazonaws.com/another_great_asset.png",
       "name": "another_great_asset.png",
       "file_name": "another_great_asset.png",
+      "file_size_bytes": "38182",
+      "mime_type": "image/png",
+      "created_at": 1421771582,
+      "updated_at": 1421771582
+    }
+  ],
+  "attached_assets": [
+    {
+      "id": 2,
+      "url": "https://s3.amazonaws.com/an_attached_asset.png",
+      "name": "an_attached_asset.png",
+      "file_name": "an_attached_asset.png",
       "file_size_bytes": "38182",
       "mime_type": "image/png",
       "created_at": 1421771582,
@@ -502,6 +526,7 @@ curl -G https://api.contently.com/v1/taxonomy \
     { "name": "url" },
     { "name": "seo_keywords" },
     { "name": "assets" }
+    { "name": "attached_assets" }
   ]
 }
 ```
