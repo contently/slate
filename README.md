@@ -23,6 +23,6 @@ bundle exec middleman build
 ```
 3. Sync the static files to s3 using middleman s3_sync:
 ```zsh
-bundle exec middleman s3_sync
+middleman s3_sync
 ```
 4. Verify changes are visible on http://docs.contently.com/api/

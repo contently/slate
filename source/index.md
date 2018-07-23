@@ -188,19 +188,6 @@ curl --get https://api.contently.com/v1/stories \
         "created_at": 1421771582,
         "updated_at": 1421771582
       }
-    ],
-    "attached_assets": [
-      {
-        "id": 1,
-        "url": "https://s3.amazonaws.com/another_great_asset.png",
-        "name": "another_great_asset.png",
-        "asset_type": "embedded",
-        "file_name": "another_great_asset.png",
-        "file_size_bytes": "38182",
-        "mime_type": "image/png",
-        "created_at": 1421771582,
-        "updated_at": 1421771582
-      }
     ]
   }
 ]
@@ -349,19 +336,6 @@ Returns fields for the specified story.
       "created_at": 1421771582,
       "updated_at": 1421771582
     }
-  ],
-  "attached_assets": [
-    {
-      "id": 1,
-      "url": "https://s3.amazonaws.com/another_great_asset.png",
-      "name": "another_great_asset.png",
-      "asset_type": "embedded",
-      "file_name": "another_great_asset.png",
-      "file_size_bytes": "38182",
-      "mime_type": "image/png",
-      "created_at": 1421771582,
-      "updated_at": 1421771582
-    }
   ]
 }
 ```
@@ -386,7 +360,6 @@ contributors | Array of Objs. | An array of the Contently users who worked on th
 creator | Obj. | The user who created the story.
 publication | Obj. | The publication includes the ID and name of the story's associated publication.
 assets | Array of Objs. | An array of images embedded in the story content.
-attached_assets | Array of Objs. | An array of all assets that are associated with a story.
 custom_fields | Array of Objs. | An array of the story's associated custom fields and their content (These are freeform and extensions of stories, things like excerpts, tweets, and header images). The publication_custom_field_id is an Integer that references the associated publication_custom_field configured at the publication level and available via the taxonomy endpoint.  </br></br> Possible values for content_type include: video, image, formatted_text, and standard. Video and image custom fields only accept a file upload. Standard custom fields are a legacy type and can include both text input and file uploads in a single custom field. The custom field's content_type is also available from the taxonomy endpoint.
 story_fields | Array of Objs. | Deprecated, alias for custom_fields.
 tags | Array of Objs. | Each tag group has a publication_tag_group_id (Integer, the unique ID of the tag group from the publication taxonomy), a name (String, also defined at the publication level), and an array of values. These are configured at a publication level and assigned to stories by users to categorize and describe them.
@@ -528,8 +501,7 @@ curl -G https://api.contently.com/v1/taxonomy \
     { "name": "status" },
     { "name": "url" },
     { "name": "seo_keywords" },
-    { "name": "assets" },
-    { "name": "attached_assets" }
+    { "name": "assets" }
   ]
 }
 ```
