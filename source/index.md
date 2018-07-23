@@ -188,6 +188,19 @@ curl --get https://api.contently.com/v1/stories \
         "created_at": 1421771582,
         "updated_at": 1421771582
       }
+    ],
+    "attached_assets": [
+      {
+        "id": 1,
+        "url": "https://s3.amazonaws.com/another_great_asset.png",
+        "name": "another_great_asset.png",
+        "asset_type": "embedded",
+        "file_name": "another_great_asset.png",
+        "file_size_bytes": "38182",
+        "mime_type": "image/png",
+        "created_at": 1421771582,
+        "updated_at": 1421771582
+      }
     ]
   }
 ]
@@ -336,6 +349,19 @@ Returns fields for the specified story.
       "created_at": 1421771582,
       "updated_at": 1421771582
     }
+  ],
+  "attached_assets": [
+    {
+      "id": 1,
+      "url": "https://s3.amazonaws.com/another_great_asset.png",
+      "name": "another_great_asset.png",
+      "asset_type": "embedded",
+      "file_name": "another_great_asset.png",
+      "file_size_bytes": "38182",
+      "mime_type": "image/png",
+      "created_at": 1421771582,
+      "updated_at": 1421771582
+    }
   ]
 }
 ```
@@ -360,6 +386,7 @@ contributors | Array of Objs. | An array of the Contently users who worked on th
 creator | Obj. | The user who created the story.
 publication | Obj. | The publication includes the ID and name of the story's associated publication.
 assets | Array of Objs. | An array of images embedded in the story content.
+attached_assets | Array of Objs. | An array of all assets that are associated with a story.
 custom_fields | Array of Objs. | An array of the story's associated custom fields and their content (These are freeform and extensions of stories, things like excerpts, tweets, and header images). The publication_custom_field_id is an Integer that references the associated publication_custom_field configured at the publication level and available via the taxonomy endpoint.  </br></br> Possible values for content_type include: video, image, formatted_text, and standard. Video and image custom fields only accept a file upload. Standard custom fields are a legacy type and can include both text input and file uploads in a single custom field. The custom field's content_type is also available from the taxonomy endpoint.
 story_fields | Array of Objs. | Deprecated, alias for custom_fields.
 tags | Array of Objs. | Each tag group has a publication_tag_group_id (Integer, the unique ID of the tag group from the publication taxonomy), a name (String, also defined at the publication level), and an array of values. These are configured at a publication level and assigned to stories by users to categorize and describe them.
@@ -417,12 +444,12 @@ curl -X PUT https://api.contently.com/v1/set_webhook \
 }
 ```
 
-There is a single endpoint available for updating the webhook url for an integration.
+There is a single endpoint available for updating the webhook url for a publication.
 
 `https://api.contently.com/v1/set_webhook`
 
 
-The set webhook endpoint provides you with access to set an integration's webhook url.
+The set webhook endpoint provides you with access to set a publication's webhook url.
 
 To make publishing stories easier, we provide a webhook that allows you to push stories to your CMS after they are completed. When a user triggers the webhook on the Contently platform, it will submit a POST request to the URL you specify containing the JSON data for the story in the [format specified above](#story-details).
 
@@ -445,7 +472,6 @@ curl -G https://api.contently.com/v1/taxonomy \
 
 ```json
 {
-<<<<<<< HEAD
   "integration": {
     "name": "CMS Integration:"
   },
@@ -508,13 +534,11 @@ curl -G https://api.contently.com/v1/taxonomy \
 }
 ```
 
-There is a single endpoint available for querying the combined taxonomy of all publications tied
-to an integration.
+There is a single endpoint available for querying the taxonomy of your publication.
 
 `https://api.contently.com/v1/taxonomy`
 
 
-<<<<<<< HEAD
 The *taxonomy* endpoint provides you with access to publication level data that helps you understand your stories in a broader context. It returns story attributes, publication story fields, and user data to enable mappings between data on the Contently platform and the respective fields on your side.
 
 ### Integration
@@ -523,14 +547,13 @@ Field name | Type | Description
 name | String | The name of the integration.
 
 ### Users
-=======
-The *taxonomy* endpoint provides you with access to publication level data that helps you understand your stories in a broader context. It returns integration, custom field, tag, contributor, story format, and story attribute data to enable mappings between data on the Contently platform and the respective fields on your side.
->>>>>>> Update documenation such that it lines up with taxonomy updates
 
-### Integration
 Field name | Type | Description
 ---- | ---- | ----
-name | String | Unique name of integration associated with given API key.
+id | Integer | The unique identifier for the user.
+first_name | String | The user's first name.
+last_name | String | The user's last name.
+email | String | The user's unique email address.
 
 ### Publication custom fields
 
@@ -540,6 +563,10 @@ id | Integer | The unique identifier for the custom field.
 name | String | The name of the custom field.
 content_type | String | The content type of the custom field. Possible values include: video, image, formatted_text, and standard. Video and image custom fields only accept a file upload. Standard custom fields are a legacy type and can include both text input and file uploads in a single custom field.
 
+### Publication story fields
+
+Deprecated, aliased to Publication custom fields
+
 ### Publication tags
 
 Field name | Type | Description
@@ -548,34 +575,18 @@ id | Integer | The unique identifier for the tag
 name | String | The name of the story attribute.
 values | Array | An array of all the possible values that can be assigned to a story for a given story attribute.
 
-### Contributors
+### Publication story attributes
 
-Field name | Type | Description
----- | ---- | ----
-id | Integer | The unique identifier for the user.
-first_name | String | The user's first name.
-last_name | String | The user's last name.
-email | String | The user's unique email address.
+Deprecated, aliased to Publication tags
 
 ### Story formats
 
-An array of all the possible story formats that can be assigned to a story. This list is *not* customizable and is the same across all publications. Possible values are shown in the example response to the right.
-
-### Story attributes
-
-An array of story attribute key value pairs. Each entry contains a 'name' key, the value of which is the attribute name. These are the attributes available on the stories from the `/stories` endpoints. This array is *not* customizable and is the same across all publications. Possible values are shown in the example response to the right.
-
-### Publication story fields
-
-Deprecated, aliased to Publication custom fields
+An array of all the possible story formats that can be assigned to a story. This list is *not* customizable and is the same across all publications. Possible values are: Article / blog post, Case study, eBook, Email, Facebook post, Infographic, LinkedIn post, Original research, Photo, Presentation / brochure, Tweet, Video, Whitepaper and Other.
 
 ### Story types
 
 Deprecated, aliased to Story formats
 
-### Publication story attributes
+### Story attributes
 
-Deprecated, aliased to Publication tags
-
-
-
+An array of story attribute key value pairs. Each entry contains a 'name' key, the value of which is the attribute name. which are available on stories received via the stories end-point. This array is *not* customizable and is the same across all publications.
